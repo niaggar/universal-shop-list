@@ -5,16 +5,32 @@
     <%- include("../template/navbar.ejs") %>
 
     <div class="container">
-
       <div class="addnew">
-        
+        <form class="form">
+          <div class="spaces">
+            <div class="form-item">
+              <label for="name">Enter the name:</label>
+              <input type="text" name="name" required />
+            </div>
+            <div class="form-item">
+              <label for="description">Give a description:</label>
+              <textarea name="description" cols="30" rows="6"></textarea>
+            </div>
+            <div class="form-item">
+              <label for="price">Give the price:</label>
+              <div>
+                <input type="number" name="price" min="0" required />
+                <select name="divisa">
+                  <option value="#">#</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="btn-submit" type="submit">Add Item</button>
+        </form>
       </div>
 
-      <div class="viewlist">
-
-      </div>
-
-
+      <%- include("../template/list.ejs") %>
     </div>
   </body>
 </html>
