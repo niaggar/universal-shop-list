@@ -21,7 +21,11 @@
               <div>
                 <input type="number" name="price" min="0" required />
                 <select name="divisa">
-                  <option value="#">#</option>
+                  <% values.forEach(element => { %>
+                  <option value="<%= element[0] %>">
+                    <%= `${element[0]} --- ${element[1]}` %>
+                  </option>
+                  <% }) %>
                 </select>
               </div>
             </div>

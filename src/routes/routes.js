@@ -1,12 +1,18 @@
-const { Router } =  require("express");
+const { Router } = require('express');
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.render("pages/index")
-});
+const dataApi = require('../public/scripts/API/dataAPI');
 
-router.get("/add/:name/:price/:div", (req, res) => {
-  res.send("added");
+router.get('/', (req, res) => {
+  dataApi('symbols')
+    .then((data) => {
+      console.log('Todo bien');
+      res.render('pages/index', data);
+    })
+    .catch((err) => {
+      console.log(`Error on the promise: ${err}`);
+      res.render('pages/index', {});
+    });
 });
 
 module.exports = router;
