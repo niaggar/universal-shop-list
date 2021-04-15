@@ -6,26 +6,40 @@
 
     <div class="container">
       <div class="addnew">
-        <form class="form">
+        <form action="/add/" method="post" class="form" id="form">
           <div class="spaces">
             <div class="form-item">
-              <label for="name">Enter the name:</label>
-              <input type="text" name="name" required />
+              <label for="imp-name">Enter the name:</label>
+              <input id="imp-name" type="text" name="imp-name" required />
             </div>
             <div class="form-item">
-              <label for="description">Give a description:</label>
-              <textarea name="description" cols="30" rows="6"></textarea>
+              <label for="imp-description">Give a description:</label>
+              <textarea
+                id="imp-description"
+                name="imp-description"
+                cols="30"
+                rows="6"
+              ></textarea>
             </div>
             <div class="form-item">
-              <label for="price">Give the price:</label>
+              <label for="imp-price">Give the price:</label>
               <div>
-                <input type="number" name="price" min="0" required />
-                <select name="divisa">
-                  <% values.forEach(element => { %>
+                <input
+                  id="imp-price"
+                  type="number"
+                  name="imp-price"
+                  min="0"
+                  required
+                />
+                <select name="imp-divisa">
+                  <% if ( values != 1) { %> <% values.forEach(element => {%>
                   <option value="<%= element[0] %>">
-                    <%= `${element[0]} --- ${element[1]}` %>
+                    <%= element[0] %> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%=
+                    element[1] %>
                   </option>
-                  <% }) %>
+                  <% }) %> <% } else { %>
+                  <option value="err">Error</option>
+                  <% } %>
                 </select>
               </div>
             </div>
@@ -34,7 +48,7 @@
         </form>
       </div>
 
-      <%- include("../template/list.ejs") %>
+      <%- include("../template/list.ejs", ) %>
     </div>
   </body>
 </html>

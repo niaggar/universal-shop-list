@@ -3,7 +3,6 @@ const config = require('./config');
 
 async function dataApi(value) {
   const url = `${config.url}${value}?access_key=${config.key}`;
-  console.log(url);
   try {
     const response = await axios.get(url);
     const { symbols } = response.data;
@@ -15,7 +14,7 @@ async function dataApi(value) {
   } catch (err) {
     console.log(err);
 
-    return {};
+    return { values: [['none', 'none']] };
   }
 }
 

@@ -1,18 +1,21 @@
 const { Router } = require('express');
 const router = Router();
 
-const dataApi = require('../public/scripts/API/dataAPI');
+// const dataApi = require('../public/scripts/API/dataAPI');
+const importCountry = require('../public/scripts/importCountry');
 
 router.get('/', (req, res) => {
-  dataApi('symbols')
+  importCountry()
     .then((data) => {
-      console.log('Todo bien');
       res.render('pages/index', data);
     })
     .catch((err) => {
-      console.log(`Error on the promise: ${err}`);
-      res.render('pages/index', {});
+      res.render('pages/index', err);
     });
+});
+
+router.post('/add', (req, res) => {
+  res.status(200).redirect('/');
 });
 
 module.exports = router;
