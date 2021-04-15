@@ -116,3 +116,12 @@ body {
 .btn-submit:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
 }
+
+/* List items container */
+
+.list-container {
+  width: 400px;
+  background: #e7e6e1;
+  height: 400px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}

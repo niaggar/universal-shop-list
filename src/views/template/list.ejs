@@ -1,8 +1,20 @@
-<div
-  style="
-    width: 600px;
-    background: #e7e6e1;
-    height: 400px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-  "
-></div>
+<div class="list-container">
+  <div class="card-item">
+    <div class="card__text">
+      <h1>Item Name</h1>
+      <p>A short description...</p>
+    </div>
+    <div class="card__value">
+      <h1>0.00</h1>
+      <select name="imp-divisa">
+        <% if ( values != 1) { %> <% values.forEach(element => {%>
+        <option value="<%= element[0] %>">
+          <%= element[0] %> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= element[1] %>
+        </option>
+        <% }) %> <% } else { %>
+        <option value="err">Error</option>
+        <% } %>
+      </select>
+    </div>
+  </div>
+</div>
