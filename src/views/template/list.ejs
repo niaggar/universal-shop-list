@@ -19,12 +19,17 @@
   </div>
 
   <!-- Cards container -->
-  <% if (list) { %> <% list.forEach(element => {%>
+  <!-- Elements that are uncopleted -->
+  <% if (list) { %> <% list.forEach(element => {%> <% if (!element['state']) {%>
 
-  <div class="card-item">
+  <div
+    class="card-item <% if (element['state']) { %> completed <% } %>"
+    id="<%= element['id'] %>"
+  >
     <div class="items-container">
       <div class="card__check">
-        <input type="checkbox" class="card__check-box" />
+        <input id="check-<%= element['id'] %>" type="checkbox"
+        class="card__check-box" <% if (element['state']) { %> checked <% } %> />
       </div>
       <div class="card__text">
         <h1><%= element['imp-name'] %></h1>
@@ -33,11 +38,42 @@
     </div>
     <div class="card__value">
       <h1>
-        <span id="txt-value"><%= element['imp-price'] %></span>
-        <span id="txt-div"><%= element['imp-divisa'] %></span>
+        <span id="txt-value-<%= element['id'] %>"
+          ><%= element['imp-price'] %></span
+        >
+        <span id="txt-div-<%= element['id'] %>"
+          ><%= element['imp-divisa'] %></span
+        >
       </h1>
     </div>
   </div>
+  <% } %> <% }); %> <% list.forEach(element => {%> <% if (element['state']) { %>
 
-  <% }); %> <% } %>
+  <div class="card-item completed" id="<%= element['id'] %>">
+    <div class="items-container">
+      <div class="card__check">
+        <input
+          id="check-<%= element['id'] %>"
+          type="checkbox"
+          class="card__check-box"
+          checked
+        />
+      </div>
+      <div class="card__text">
+        <h1><%= element['imp-name'] %></h1>
+        <p><%= element['imp-description'] %></p>
+      </div>
+    </div>
+    <div class="card__value">
+      <h1>
+        <span id="txt-value-<%= element['id'] %>"
+          ><%= element['imp-price'] %></span
+        >
+        <span id="txt-div-<%= element['id'] %>"
+          ><%= element['imp-divisa'] %></span
+        >
+      </h1>
+    </div>
+  </div>
+  <% } %> <% }); %> <% } %>
 </div>

@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { nanoid } = require('nanoid');
 const router = Router();
 
 // const dataApi = require('../public/scripts/API/dataAPI');
@@ -24,10 +25,33 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/add', (req, res) => {
+router.get('/knowid', (req, res) => {
+  const db = getConection();
+  const ids = db.get('list').map('id').value();
+  res.send(ids);
+});
+
+router.post('/editstate/', async (req, res) => {
   const db = getConection();
 
-  db.get('list').push(req.body).write();
+  db.get('list')
+    .find({ id: req.body.id })
+    .assign({ state: req.body.state })
+    .write();
+
+  res.status(200).send('All is fine');
+});
+
+router.post('/add', (req, res) => {
+  const db = getConection();
+  let id = nanoid();
+  db.get('list')
+    .push({
+      id,
+      state: false,
+      ...req.body,
+    })
+    .write();
 
   res.status(200).redirect('/');
 });
