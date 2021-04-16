@@ -1,12 +1,12 @@
 <div class="list-container">
-  <div class="card-item">
-    <div class="card__text">
-      <h1>Item Name</h1>
-      <p>A short description...</p>
+  <!-- Show the total cost -->
+  <div class="cost-container">
+    <div class="cost__text">
+      <h3>The total cost is:</h3>
+      <h1><span id="total-cost">0.00</span></h1>
     </div>
-    <div class="card__value">
-      <h1>0.00</h1>
-      <select name="imp-divisa">
+    <div class="cost__values">
+      <select class="cost__selectdiv">
         <% if ( values != 1) { %> <% values.forEach(element => {%>
         <option value="<%= element[0] %>">
           <%= element[0] %> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= element[1] %>
@@ -17,4 +17,27 @@
       </select>
     </div>
   </div>
+
+  <!-- Cards container -->
+  <% if (list) { %> <% list.forEach(element => {%>
+
+  <div class="card-item">
+    <div class="items-container">
+      <div class="card__check">
+        <input type="checkbox" class="card__check-box" />
+      </div>
+      <div class="card__text">
+        <h1><%= element['imp-name'] %></h1>
+        <p><%= element['imp-description'] %></p>
+      </div>
+    </div>
+    <div class="card__value">
+      <h1>
+        <span id="txt-value"><%= element['imp-price'] %></span>
+        <span id="txt-div"><%= element['imp-divisa'] %></span>
+      </h1>
+    </div>
+  </div>
+
+  <% }); %> <% } %>
 </div>
