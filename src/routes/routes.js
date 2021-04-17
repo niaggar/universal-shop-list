@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { nanoid } = require('nanoid');
 const router = Router();
 
-// const dataApi = require('../public/scripts/API/dataAPI');
+const dataApi = require('../API/dataAPI');
 const importCountry = require('../public/scripts/importCountry');
 const { getConection } = require('../../database/database');
 
@@ -31,6 +31,18 @@ router.get('/knowid', (req, res) => {
   res.send(ids);
 });
 
+router.get('/price', (req, res) => {
+  const db = getConection();
+
+  const values = db
+    .get('list')
+    .filter({ state: false })
+    .map('imp-price')
+    .value();
+
+  res.status(200).send(values);
+});
+
 router.post('/editstate/', async (req, res) => {
   const db = getConection();
 
@@ -42,12 +54,26 @@ router.post('/editstate/', async (req, res) => {
   res.status(200).send('All is fine');
 });
 
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
   const db = getConection();
-  let id = nanoid();
+
+  if (req.body['imp-divisa'] != 'EUR') {
+    const data = await dataApi('latest');
+
+    data.values.forEach((element) => {
+      if (element[0] == req.body['imp-divisa']) {
+        req.body['imp-price'] = (
+          parseInt(req.body['imp-price']) / element[1]
+        ).toFixed(1);
+      }
+    });
+
+    req.body['imp-divisa'] = 'EUR';
+  }
+
   db.get('list')
     .push({
-      id,
+      id: nanoid(),
       state: false,
       ...req.body,
     })
