@@ -6,9 +6,11 @@
       <h1><span id="total-cost">0.00</span></h1>
     </div>
     <div class="cost__values">
-      <select class="cost__selectdiv">
+      <select class="cost__selectdiv" id="select-div">
         <% if ( values != 1) { %> <% values.forEach(element => {%>
-        <option value="<%= element[0] %>">
+        <option value="<%= element[0] %>" <% if (element[0] == 'EUR') { %>
+          selected
+        <% } %>>
           <%= element[0] %> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= element[1] %>
         </option>
         <% }) %> <% } else { %>
@@ -41,7 +43,7 @@
         <span id="txt-value-<%= element['id'] %>"
           ><%= element['imp-price'] %></span
         >
-        <span id="txt-div-<%= element['id'] %>"
+        <span class="txt-div"
           ><%= element['imp-divisa'] %></span
         >
       </h1>

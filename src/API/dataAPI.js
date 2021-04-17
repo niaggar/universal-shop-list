@@ -1,16 +1,17 @@
 const axios = require('axios');
 const config = require('./config');
 
+// value could be <<symbols>> <<latest>>
 async function dataApi(value) {
   const url = `${config.url}${value}?access_key=${config.key}`;
+  value = value == 'latest' ? 'rates' : value;
   try {
-    const response = await axios.get(url);
-    const { symbols } = response.data;
-    const countrys = Object.entries(symbols);
+    let response;
+    response = await axios.get(url);
+    response = response.data[value];
+    response = Object.entries(response);
 
-    return new Promise((resolve, reject) => {
-      resolve({ values: countrys });
-    });
+    return { values: response };
   } catch (err) {
     console.log(err);
 
