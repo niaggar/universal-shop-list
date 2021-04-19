@@ -7,7 +7,7 @@
 
       createEventsListeners(result);
       updatePrice();
-      changeDiv();
+      changeDiv(result);
     })
     .catch((err) => {
       console.log(err);
@@ -15,6 +15,7 @@
 })();
 
 const cards = [];
+let actualDiv = 'EUR';
 
 const createEventsListeners = (data) => {
   // Adding to an array all the cards
@@ -50,30 +51,58 @@ const modifyStateDB = (state, id) => {
   });
 };
 
-const updatePrice = () => {
+const updatePrice = async (div = actualDiv) => {
   const txt = document.getElementById('total-cost');
 
-  fetch('/price').then(async (res) => {
-    let result;
-    result = await res.text();
-    result = JSON.parse(result);
+  let result;
+  result = await fetch(`/price/${div}`);
+  result = await result.text();
+  result = JSON.parse(result);
 
-    let value = 0;
-    result.forEach((element) => {
-      value = value + parseFloat(element);
-    });
+  console.log(result);
 
-    txt.innerHTML = value;
+  let value = 0;
+  result.forEach((element) => {
+    value = value + parseFloat(element);
   });
+
+  txt.innerHTML = value;
 };
 
-const changeDiv = () => {
+const changeDiv = (data) => {
   const selectDiv = document.getElementById('select-div');
   const txtDiv = document.getElementsByClassName('txt-div');
 
-  selectDiv.addEventListener('change', (ev) => {
+  const txtValues = [];
+  data.forEach((element) => {
+    txtValues.push(document.getElementById(`txt-value-${element}`));
+  });
+
+  selectDiv.addEventListener('change', async () => {
+    actualDiv = selectDiv.value;
+
     for (let item of txtDiv) {
       item.innerHTML = selectDiv.value;
     }
+
+    let result = await fetch('/convert', {
+      method: 'POST',
+      body: JSON.stringify({ toConvert: selectDiv.value }),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    result = await result.text();
+    result = JSON.parse(result);
+
+    let i = 0;
+    for (let item of txtValues) {
+      item.innerHTML = result[i];
+      i++;
+    }
+
+    updatePrice(selectDiv.value);
   });
 };

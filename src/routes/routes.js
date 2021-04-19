@@ -3,6 +3,7 @@ const { nanoid } = require('nanoid');
 const router = Router();
 
 const dataApi = require('../API/dataAPI');
+const convert = require('../public/scripts/convert');
 const importCountry = require('../public/scripts/importCountry');
 const { getConection } = require('../../database/database');
 
@@ -31,14 +32,21 @@ router.get('/knowid', (req, res) => {
   res.send(ids);
 });
 
-router.get('/price', (req, res) => {
+router.get('/price/:div', async (req, res) => {
   const db = getConection();
+  const todiv = req.params.div;
 
-  const values = db
+  console.log(todiv);
+
+  let values;
+  values = await db
     .get('list')
     .filter({ state: false })
     .map('imp-price')
     .value();
+  values = await convert(db, todiv, values);
+
+  console.log(values);
 
   res.status(200).send(values);
 });
@@ -80,6 +88,13 @@ router.post('/add', async (req, res) => {
     .write();
 
   res.status(200).redirect('/');
+});
+
+router.post('/convert', async (req, res) => {
+  const db = getConection();
+  let results = await convert(db, req.body.toConvert);
+
+  res.status(200).send(results);
 });
 
 module.exports = router;
