@@ -51,6 +51,7 @@ const modifyStateDB = (state, id) => {
   });
 };
 
+<<<<<<< HEAD
 const updatePrice = async (div = actualDiv) => {
   const txt = document.getElementById('total-cost');
 
@@ -104,5 +105,32 @@ const changeDiv = (data) => {
     }
 
     updatePrice(selectDiv.value);
+=======
+const updatePrice = () => {
+  const txt = document.getElementById('total-cost');
+
+  fetch('/price').then(async (res) => {
+    let result;
+    result = await res.text();
+    result = JSON.parse(result);
+
+    let value = 0;
+    result.forEach((element) => {
+      value = value + parseFloat(element);
+    });
+
+    txt.innerHTML = value;
+  });
+};
+
+const changeDiv = () => {
+  const selectDiv = document.getElementById('select-div');
+  const txtDiv = document.getElementsByClassName('txt-div');
+
+  selectDiv.addEventListener('change', (ev) => {
+    for (let item of txtDiv) {
+      item.innerHTML = selectDiv.value;
+    }
+>>>>>>> d44753e8d1972c3762b525d57c9e04dd89bb97d2
   });
 };
