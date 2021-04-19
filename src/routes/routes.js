@@ -32,7 +32,6 @@ router.get('/knowid', (req, res) => {
   res.send(ids);
 });
 
-<<<<<<< HEAD
 router.get('/price/:div', async (req, res) => {
   const db = getConection();
   const todiv = req.params.div;
@@ -41,22 +40,13 @@ router.get('/price/:div', async (req, res) => {
 
   let values;
   values = await db
-=======
-router.get('/price', (req, res) => {
-  const db = getConection();
-
-  const values = db
->>>>>>> d44753e8d1972c3762b525d57c9e04dd89bb97d2
     .get('list')
     .filter({ state: false })
     .map('imp-price')
     .value();
-<<<<<<< HEAD
   values = await convert(db, todiv, values);
 
   console.log(values);
-=======
->>>>>>> d44753e8d1972c3762b525d57c9e04dd89bb97d2
 
   res.status(200).send(values);
 });
