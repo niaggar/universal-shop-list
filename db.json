@@ -1,36 +1,3 @@
 {
-  "list": [
-    {
-      "id": "e4B8m2Sho6P1XAZ4EN8Ju",
-      "state": true,
-      "imp-name": "Item en COP",
-      "imp-description": "",
-      "imp-price": "104.2",
-      "imp-divisa": "EUR"
-    },
-    {
-      "id": "x2GJphPDM_PpHvqiJTVZq",
-      "state": false,
-      "imp-name": "Item en USD",
-      "imp-description": "",
-      "imp-price": "375.6",
-      "imp-divisa": "EUR"
-    },
-    {
-      "id": "16Wi4eJv7_3Bg_RBjTNhQ",
-      "state": false,
-      "imp-name": "asdsads",
-      "imp-description": "asdsad",
-      "imp-price": "668.8",
-      "imp-divisa": "EUR"
-    },
-    {
-      "id": "PS2K4jZB1gZTeKi5JokWh",
-      "state": true,
-      "imp-name": "Carro",
-      "imp-description": "Rojo",
-      "imp-price": "25037.7",
-      "imp-divisa": "EUR"
-    }
-  ]
+  "list": []
 }

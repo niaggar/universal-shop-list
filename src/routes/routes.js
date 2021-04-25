@@ -7,6 +7,8 @@ const convert = require('../public/scripts/convert');
 const importCountry = require('../public/scripts/importCountry');
 const { getConection } = require('../../database/database');
 
+let localstorageAPI;
+
 router.get('/', (req, res) => {
   const db = getConection();
 
@@ -26,17 +28,33 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/knowid', (req, res) => {
+// Return the IDs of the task list
+router.get('/know', (req, res) => {
   const db = getConection();
   const ids = db.get('list').map('id').value();
-  res.send(ids);
+  res.status(200).send(ids);
 });
 
-router.get('/price/:div', async (req, res) => {
-  const db = getConection();
-  const todiv = req.params.div;
+// Return the data of the API
+router.get('/API', async (req, res) => {
+  let resultAPI;
+  resultAPI = await dataApi('latest', false);
 
-  console.log(todiv);
+  resultAPI = {
+    time: new Date().toLocaleDateString(),
+    ...resultAPI,
+  };
+
+  res.status(200).send(resultAPI);
+});
+
+router.post('/price/', async (req, res) => {
+  const db = getConection();
+
+  const todiv = req.body.div;
+  const conversor = req.body.values;
+
+  localstorageAPI = conversor;
 
   let values;
   values = await db
@@ -44,9 +62,7 @@ router.get('/price/:div', async (req, res) => {
     .filter({ state: false })
     .map('imp-price')
     .value();
-  values = await convert(db, todiv, values);
-
-  console.log(values);
+  values = await convert(db, todiv, values, { values: conversor });
 
   res.status(200).send(values);
 });
@@ -66,9 +82,7 @@ router.post('/add', async (req, res) => {
   const db = getConection();
 
   if (req.body['imp-divisa'] != 'EUR') {
-    const data = await dataApi('latest');
-
-    data.values.forEach((element) => {
+    localstorageAPI.forEach((element) => {
       if (element[0] == req.body['imp-divisa']) {
         req.body['imp-price'] = (
           parseInt(req.body['imp-price']) / element[1]
@@ -92,7 +106,9 @@ router.post('/add', async (req, res) => {
 
 router.post('/convert', async (req, res) => {
   const db = getConection();
-  let results = await convert(db, req.body.toConvert);
+  let results = await convert(db, req.body.toConvert, false, {
+    values: req.body.values,
+  });
 
   res.status(200).send(results);
 });

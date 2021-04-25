@@ -4,6 +4,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-size: 14px;
 }
 
 :root {
@@ -31,7 +32,7 @@ body {
 .nav__icon {
   font-family: var(--title-font);
   user-select: none;
-  font-size: 1.5rem;
+  font-size: 28px;
   text-decoration: none;
   color: var(--icon);
   text-shadow: 0px 0px 2px #f2a154;
@@ -41,15 +42,18 @@ body {
 .container {
   width: 100%;
   height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 30px;
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: 30vw 60vw;
+  justify-items: center;
+  justify-content: center;
+  row-gap: 20px;
+  column-gap: 20px;
 }
 
 /* Addnew section */
 .addnew {
-  width: 450px;
+  width: 100%;
   height: 500px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
@@ -120,11 +124,11 @@ body {
 /* List items container */
 
 .list-container {
-  width: 600px;
+  width: 100%;
   height: fit-content;
   background: var(--tarjet-bk);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-  padding: 50px;
+  padding: 30px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -141,18 +145,18 @@ body {
 
 .cost__text {
   color: var(--icon);
-  text-align: left;
+  text-align: right;
 }
 
 .cost__text h3 {
   font-family: var(--normal-font);
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 100;
 }
 
-.cost__text h1 {
+.cost__text h1 > span {
   font-family: var(--title-font);
-  font-size: 5rem;
+  font-size: 40px;
 }
 
 .cost__values {
@@ -165,9 +169,9 @@ body {
 
 .cost__selectdiv {
   display: block;
-  width: 250px;
+  width: fit-content;
   height: auto;
-  font-size: 5rem;
+  font-size: 30px;
   font-family: var(--title-font);
   color: #f2a154;
   background: none;
