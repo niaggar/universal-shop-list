@@ -48,6 +48,14 @@ router.get('/API', async (req, res) => {
   res.status(200).send(resultAPI);
 });
 
+router.get('/removecompleted', async (req, res) => {
+  const db = getConection();
+
+  await db.get('list').remove({ state: true }).write();
+
+  res.status(200).redirect('/');
+});
+
 router.post('/price/', async (req, res) => {
   const db = getConection();
 

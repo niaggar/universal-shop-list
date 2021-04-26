@@ -30,6 +30,8 @@ const createEventsListeners = (data) => {
     cards.push(document.getElementById(element));
   });
 
+  modalClearCompleted();
+
   // Adding the event to the checkbox
   data.forEach((element, index) => {
     let toadd = document.getElementById(`check-${element}`);
@@ -165,4 +167,26 @@ const divLocalStorage = async (type, update) => {
 const compareDateOfDataAPI = async () => {
   const { time } = await divLocalStorage('JSON');
   return time == new Date().toLocaleDateString();
+};
+
+const modalClearCompleted = async () => {
+  const modal = document.getElementById('modal-clear-completed');
+  const modalBtnContinue = document.getElementById('modal-btn-continue');
+  const modalBtnCancel = document.getElementById('modal-btn-cancel');
+
+  document
+    .getElementById('btn-clear-finished')
+    .addEventListener('click', () => {
+      modal.classList.toggle('hidden');
+
+      modalBtnContinue.addEventListener('click', async () => {
+        modal.classList.add('hidden');
+        await fetch('/removecompleted').catch((err) => console.log(err));
+        window.location.reload();
+      });
+
+      modalBtnCancel.addEventListener('click', () => {
+        modal.classList.add('hidden');
+      });
+    });
 };

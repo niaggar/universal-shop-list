@@ -24,10 +24,7 @@
   <!-- Elements that are uncopleted -->
   <% if (list) { %> <% list.forEach(element => {%> <% if (!element['state']) {%>
 
-  <div
-    class="card-item <% if (element['state']) { %> completed <% } %>"
-    id="<%= element['id'] %>"
-  >
+  <div class="card-item" id="<%= element['id'] %>">
     <div class="items-container">
       <div class="card__check">
         <input id="check-<%= element['id'] %>" type="checkbox"
@@ -78,4 +75,6 @@
     </div>
   </div>
   <% } %> <% }); %> <% } %>
+
+  <a class="btn btn-delete" id="btn-clear-finished">Delete Finished</a>
 </div>

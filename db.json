@@ -1,20 +1,3 @@
 {
-  "list": [
-    {
-      "id": "2fMdkmXC-tuDN-XRK_0-C",
-      "state": false,
-      "imp-name": "Comprar el mercado",
-      "imp-description": "Pan, azúcar, leche, papas, arroz, mango y mayonesa",
-      "imp-price": "78",
-      "imp-divisa": "EUR"
-    },
-    {
-      "id": "1nTyu3lqiZ5F1Q_5rrQXJ",
-      "state": false,
-      "imp-name": "PC gamer",
-      "imp-description": "Procesador, placa madre, fuente de alimentación, gabinete, pantalla, grafica, ram y periféricos",
-      "imp-price": "12000",
-      "imp-divisa": "EUR"
-    }
-  ]
+  "list": []
 }
