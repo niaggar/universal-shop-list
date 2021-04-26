@@ -41,7 +41,7 @@
     <div class="card__value">
       <h1>
         <span id="txt-value-<%= element['id'] %>"
-          ><%= element['imp-price'] %></span
+          ><%= new Intl.NumberFormat().format(element['imp-price']) %></span
         >
         <span class="txt-div"
           ><%= element['imp-divisa'] %></span
@@ -69,7 +69,7 @@
     <div class="card__value">
       <h1>
         <span id="txt-value-<%= element['id'] %>"
-          ><%= element['imp-price'] %></span
+          ><%= new Intl.NumberFormat().format(element['imp-price']) %></span
         >
         <span class="txt-div">
         <%= element['imp-divisa'] %></span

@@ -132,7 +132,7 @@ const changeDiv = (data) => {
     // Change the currency txt of the tasks
     let i = 0;
     for (let item of txtValues) {
-      item.innerHTML = result[i];
+      item.innerHTML = new Intl.NumberFormat().format(result[i]);
       i++;
     }
 
