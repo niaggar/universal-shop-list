@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 const url = process.env.URL;
 const key = process.env.TOKEN_FX;
