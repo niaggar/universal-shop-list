@@ -3,8 +3,8 @@ const router = require('./routes/routes.js');
 const path = require('path');
 
 class App {
-  constructor(port = 8000) {
-    this.port = port;
+  constructor(port) {
+    this.port = process.env.PORT || port;
     this.app = express();
     this.middelwares();
   }
