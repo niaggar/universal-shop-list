@@ -4,7 +4,7 @@ const router = Router();
 
 const dataApi = require('../API/dataAPI');
 const convert = require('../public/scripts/convert');
-const importCountry = require('../public/scripts/importCountry');
+const importCountry = require('../public/scripts/importcountry');
 const { getConection } = require('../../database/database');
 
 let localstorageAPI;
